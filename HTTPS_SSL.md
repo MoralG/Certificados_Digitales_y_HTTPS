@@ -320,7 +320,7 @@ sudo openssl genrsa -out alejandro.iesgn.org.key 4096
    e is 65537 (0x010001)
 ~~~
 
-2. Utiliza la clave anterior para generar un CSR, considerando que deseas acceder al servidor tanto con el FQDN (tunombre.iesgn.org) como con el nombre de host (implica el uso de las extensiones Alt Name).
+2. Utiliza la clave anterior para generar un CSR, considerando que deseas acceder al servidor tanto con el FQDN (image/tunombre.iesgn.org) como con el nombre de host (implica el uso de las extensiones Alt Name).
 
 ###### Creamos un fichero de configuración, *alejandro.iesgn.org.conf*, y le añadimos lo siguiente:
 
@@ -380,7 +380,7 @@ sudo openssl req -new -nodes -sha256 -config alejandro.iesgn.org.conf -out aleja
 
 ###### Prueba de Metadatos del certificado que le vamos a enviar al nuestra compañera
 
-![Tarea2.1](Certs.png)
+![Tarea2.1](image/Tarea2.1_Certificados.png)
 
 4. Recibe como respuesta un certificado X.509 para el servidor firmado y el certificado de la autoridad certificadora.
 
@@ -440,15 +440,104 @@ Redirect / https://alejandro.iesgn.org
 
 ###### Ahora comprobamos que el *http* es redireccionado a *https* y nos muestra un página de advertencias con el mensaje: *Advertencia: riesgo potencial de seguridad a continuación*
 
-![Tarea2.2](Certs.png)
+![Tarea2.2](image/Tarea2.2_Certificados.png)
 
 ###### Tenemos que importar el certificado de la Autoridad certificadora en:
 
 ###### *Preferencias*>*Privacidad y Seguridad*>*Ver Certificados*>*Autoridades*>*Importar*
 
-![Tarea2.3](Certs.png)
-![Tarea2.4](Certs.png)
+![Tarea2.3](image/Tarea2.3_Certificados.png)
+![Tarea2.4](image/Tarea2.4_Certificados.png)
 
 ###### Ahora nos saldrá el candado de conexión segura.
 
-![Tarea2.5](Certs.png)
+![Tarea2.5](image/Tarea2.5_Certificados.png)
+
+### Tarea 2: Certificados digital con CAcert
+-----------------------------------------------------------------------------
+
+#### El lema de CAcert es Free digital certificates for everyone y es que la utilización de certificados emitidos por CA comerciales no es posible para todos los sitios de Internet debido a su coste, lo que los limita su uso a transacciones económicas o sitios con datos relevantes. CAcert es una organización sin ánimo de lucro que mantiene una infraestructura equivalente a una CA comercial aunque con ciertas limitaciones.
+
+#### Vamos a cambiar el certificado de la página que has desarrollado en el punto anterior para usar el nuevo certificado emitido por CAcert.
+
+* Tienes que decirle al profesor el nombre de subdominio que vas a utilizar.
+* Tienes que mandar el correo al usuario root
+* Otra opción es que uses un dominio que sea tuyo!!!
+
+#### Los pasos que hay que dar para utilizar un certificado X.509 emitido por CAcert son los siguientes:
+
+##### 1. Darse de alta como usuario en el sitio web.
+
+###### Para darse de alta tenemos que registrarnos en http://www.cacert.org/
+
+##### 2. Dar de alta el dominio para el que queremos obtener el certificado. (opción Domains -> Add)
+
+###### Una vez registrado, iniciamos sesión y accedemos a *Domains*->*Add* e introducimos el subdomino *amorales.gonzalonazareno.org*
+
+![Tarea1.1](image/Tarea1.1_CAcert.png)
+
+###### Una vez hecho esto tendremos que elegir un dirección de correo autorizada, en este caso sera *root*
+
+![Tarea1.2](image/Tarea1.2_CAcert.png)
+
+##### 3. CAcert verifica que podemos hacer uso legítimo del dominio enviando un mensaje de correo electrónico.
+
+###### CAcert enviará el correo y tendremos que esperar a que nuestro profesor que tiene acceso al dominio *gonzalonazareno.org* lo verifique.
+
+###### Una vez verificado podremos continuar con el siguiente paso.
+
+![Tarea1.3](image/Tarea1.3_CAcert.png)
+
+##### 4. Dar de alta el certificado de un servidor mediante una solicitud de firma certificado (CSR)
+
+###### Creamos la clave privada *amorales.gonzalonazareno.org.key*, el fichero de configuración *amorales.gonzalonazareno.org.conf* y con estos dos creamos el certificado *amorales.gonzalonazareno.org.csr*
+
+###### Nos vamos en la pagina de CAcert al apartado crear certificado de servidor y añadimos nuestro certificado ya creado.
+
+![Tarea1.4](image/Tarea1.4_CAcert.png)
+![Tarea1.5](image/Tarea1.5_CAcert.png)
+
+##### 5. Configurar el servidor web con el certificado X.509 emitido por la CA.
+
+###### Creamos un fichero *amorales.gonzalonazareno.org.crt* y copiamos dentro el certificado firmado anteriormente y lo metemos en */etc/ssl/cert*
+
+###### Modificamos el fichero *alejandro-ssl.conf*
+~~~
+<IfModule mod_ssl.c>
+        <VirtualHost _default_:443>
+                ServerName amorales.gonzalonazareno.org
+                ServerAdmin alejandro@localhost
+                DocumentRoot /var/www/html/alejandro
+
+                SSLEngine on
+
+                SSLCertificateFile /etc/ssl/certs/amorales.gonzalonazareno.org.crt
+                SSLCertificateKeyFile /etc/ssl/private/amorales.gonzalonazareno.org.key
+                SSLCertificateChainFile /etc/ssl/certs/amorales.gonzalonazareno.org.csr
+
+                ErrorLog ${APACHE_LOG_DIR}/error.log
+                CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+        </VirtualHost>
+</IfModule>
+~~~
+
+###### Guardamos y reiniciamos el servicio de apache.
+
+##### 6. Al acceder a la página debemos evitar el mensaje de error de “Conexión segura fallida”.
+
+###### Nos descargamos el certificado *.pem* de https://www.cacert.org/index.php?id=3 y lo metemos en el navegador
+
+![Tarea1.6](image/Tarea1.6_CAcert.png)
+
+###### Funcionamiento de pagina web
+
+![Tarea1.7](image/Tarea1.7_CAcert.png)
+
+##### 7. ¿Qué fecha de caducidad tiene el certificado? ¿Qué tendrás que hacer cuando termine ese tiempo?
+
+###### La fecha la podemos ver en los detalles del certificado:
+
+![Tarea1.8](image/Tarea1.8_CAcert.png)
+
+###### Tendríamos que renovar el certificado desde la pagina ya indicada
