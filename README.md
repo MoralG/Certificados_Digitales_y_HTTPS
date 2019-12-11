@@ -4,7 +4,7 @@
 
 # Certificado digital de persona física
 
-### Tarea 1: [Instalación del certificado]()
+### Tarea 1: [Instalación del certificado](https://github.com/MoralG/Certificados_Digitales_y_HTTPS/blob/master/Certificado_Digital_Persona_Fisica.md#tarea-1-instalaci%C3%B3n-del-certificad)
 -------------------------------------------------------------------------
 
 1. Una vez que hayas obtenido tu certificado, explica brevemente como se instala en tu navegador favorito.
@@ -12,19 +12,19 @@
 3. ¿Cómo puedes hacer una copia de tu certificado?, ¿Como vas a realizar la copia de seguridad de tu certificado?. Razona la respuesta.
 4. Investiga como exportar la clave pública de tu certificado.
 
-### Tarea 2: [Validación del certificado]()
+### Tarea 2: [Validación del certificado](https://github.com/MoralG/Certificados_Digitales_y_HTTPS/blob/master/Certificado_Digital_Persona_Fisica.md#tarea-2-validaci%C3%B3n-del-certificado)
 -------------------------------------------------------------------------
 
 1. Instala en tu ordenador el software autofirma y desde la página de VALIDe valida tu certificado. Muestra capturas de pantalla donde se comprueba la validación.
 
-### Tarea 3: [Firma electrónica]()
+### Tarea 3: [Firma electrónica](https://github.com/MoralG/Certificados_Digitales_y_HTTPS/blob/master/Certificado_Digital_Persona_Fisica.md#tarea-3-firma-electr%C3%B3nica)
 -------------------------------------------------------------------------
 
 1. Utilizando la página VALIDe y el programa autofirma, firma un documento con tu certificado y envíalo por correo a un compañero.
 2. Tu debes recibir otro documento firmado por un compañero y utilizando las herramientas anteriores debes visualizar la firma (Visualizar Firma) y (Verificar Firma). ¿Puedes verificar la firma aunque no tengas la clave pública de tu compañero?, ¿Es necesario estar conectado a internet para hacer la validación de la firma?. Razona tus respuestas.
 3. Entre dos compañeros, firmar los dos un documento, verificar la firma para comprobar que está firmado por los dos.
 
-### Tarea 4: [Autentificación]()
+### Tarea 4: [Autentificación](https://github.com/MoralG/Certificados_Digitales_y_HTTPS/blob/master/Certificado_Digital_Persona_Fisica.md#tarea-4-autentificaci%C3%B3n)
 -------------------------------------------------------------------------
 
 1. Utilizando tu certificado accede a alguna página de la administración pública )cita médica, becas, puntos del carnet,…). Entrega capturas de pantalla donde se demuestre el acceso a ellas.
@@ -33,7 +33,7 @@
 
 #### Antes de hacer esta práctica vamos a crear una página web (puedes usar una página estática o instalar una aplicación web) en un servidor web apache2 que se acceda con el nombre tunombre.iesgn.org.
 
-### Tarea 1: [Certificado autofirmado]()
+### Tarea 1: [Certificado autofirmado](https://github.com/MoralG/Certificados_Digitales_y_HTTPS/blob/master/HTTPS_SSL.md#tarea-1-certificado-autofirmado)
 -------------------------------------------------------------------------
 
 #### Esta práctica la vamos a realizar con un compañero. En un primer momento un alumno creará una Autoridad Certficadora y firmará un certificado para la página del otro alumno. Posteriormente se volverá a realizar la práctica con los roles cambiados.
@@ -52,7 +52,7 @@
 4. Recibe como respuesta un certificado X.509 para el servidor firmado y el certificado de la autoridad certificadora.
 5. Configura tu servidor web con https en el puerto 443, haciendo que las peticiones http se redireccionen a https (forzar https).
 
-### Tarea 2: [Certificados digital con CAcert]()
+### Tarea 2: [Certificados digital con CAcert](https://github.com/MoralG/Certificados_Digitales_y_HTTPS/blob/master/HTTPS_SSL.md#tarea-2-certificados-digital-con-cacert)
 -------------------------------------------------------------------------
 
 #### El lema de CAcert es Free digital certificates for everyone y es que la utilización de certificados emitidos por CA comerciales no es posible para todos los sitios de Internet debido a su coste, lo que los limita su uso a transacciones económicas o sitios con datos relevantes. CAcert es una organización sin ánimo de lucro que mantiene una infraestructura equivalente a una CA comercial aunque con ciertas limitaciones.
