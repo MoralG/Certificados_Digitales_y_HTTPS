@@ -1,6 +1,6 @@
 # Certificado digital de persona física
 
-## Tarea 1: Instalación del certificad
+## Tarea 1: Instalación del certificado
 
 #### Una vez que hayas obtenido tu certificado, explica brevemente como se instala en tu navegador favorito.
 
